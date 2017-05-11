@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from './Button';
 
 function Table({ list, onDismiss }) {
@@ -24,5 +25,10 @@ function Table({ list, onDismiss }) {
     </div>
   );
 }
+
+Table.propTypes = {
+  list: PropTypes.arrayOf.isRequired,
+  onDismiss: PropTypes.func.isRequired,
+};
 
 export default Table;
