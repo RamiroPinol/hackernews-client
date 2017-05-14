@@ -27,7 +27,6 @@ function Table({ list, onDismiss }) {
 }
 
 Table.propTypes = {
-  list: PropTypes.arrayOf.isRequired,
   onDismiss: PropTypes.func.isRequired,
 };
 

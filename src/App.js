@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Search from './Search';
 import Table from './Table';
 import Button from './Button';
+import Loading from './Loading';
 import './App.css';
 
 const DEFAULT_QUERY = 'redux';
@@ -22,6 +23,7 @@ class App extends Component {
       results: null,
       searchTerm: DEFAULT_QUERY,
       searchKey: '',
+      isLoading: false,
     };
 
     this.onDismiss = this.onDismiss.bind(this);
@@ -38,7 +40,10 @@ class App extends Component {
 
     const oldHits = results && results[searchKey] ? results[searchKey].hits : [];
     const updatedHits = [...oldHits, ...hits];
-    this.setState({ results: { ...results, [searchKey]: { hits: updatedHits, page } } });
+    this.setState({
+      results: { ...results, [searchKey]: { hits: updatedHits, page } },
+      isLoading: false,
+    });
   }
 
   needsToSearchTopstories(searchTerm) {
@@ -46,6 +51,8 @@ class App extends Component {
   }
 
   fetchSearchTopstories(searchTerm, page) {
+    this.setState({ isLoading: true });
+
     fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}
       &${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
       .then(res => res.json())
@@ -78,7 +85,7 @@ class App extends Component {
   }
 
   render() {
-    const { searchTerm, results, searchKey } = this.state;
+    const { searchTerm, results, searchKey, isLoading } = this.state;
     const page = (results && results[searchKey] && results[searchKey].page) || 0;
     const list = (results && results[searchKey] && results[searchKey].hits) || [];
 
@@ -96,9 +103,12 @@ class App extends Component {
               onDismiss={this.onDismiss}
             />
             <div className="interactions">
-              <Button onClick={() => this.fetchSearchTopstories(searchKey, page + 1)}>
-                More
-              </Button>
+              {isLoading ?
+                <Loading /> :
+                <Button onClick={() => this.fetchSearchTopstories(searchKey, page + 1)}>
+                  More
+                </Button>
+              }
             </div>
           </div>
         </div>
