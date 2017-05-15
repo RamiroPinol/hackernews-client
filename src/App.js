@@ -24,8 +24,6 @@ class App extends Component {
       searchTerm: DEFAULT_QUERY,
       searchKey: '',
       isLoading: false,
-      sortKey: 'NONE',
-      isSortReverse: false,
     };
 
     this.onDismiss = this.onDismiss.bind(this);
@@ -34,10 +32,7 @@ class App extends Component {
     this.setSearchTopstories = this.setSearchTopstories.bind(this);
     this.fetchSearchTopstories = this.fetchSearchTopstories.bind(this);
     this.needsToSearchTopstories = this.needsToSearchTopstories.bind(this);
-    this.sortBy = this.sortBy.bind(this);
-    this.onSort = this.onSort.bind(this);
   }
-
 
   setSearchTopstories(result) {
     const { hits, page } = result;
@@ -49,27 +44,6 @@ class App extends Component {
       results: { ...results, [searchKey]: { hits: updatedHits, page } },
       isLoading: false,
     });
-  }
-
-  // Method to sort list of stories. SortBy(ARRAY, SORTING_TARGET)
-  // SORTING_TARGET (string) must be one of the 5 options:
-  // "NONE", "title", "author", "num_comments" or "points"
-  sortBy(array, sortKey) {
-    if (sortKey === 'NONE') {
-      return array;
-    } else if (sortKey === 'title' || sortKey === 'author') {
-      return array.sort((a, b) => (a[sortKey] > b[sortKey] ? 1 : -1));
-    } else if (sortKey === 'num_comments' || sortKey === 'points') {
-      return array.sort((a, b) => (a[sortKey] > b[sortKey] ? -1 : 1));
-    }
-    console.error('ERROR: sortKey must be "title", "author", "num_comments" or "points"');
-  }
-
-  // Method to change sortKey
-  onSort(sortKey) {
-    const isSortReverse =
-      this.state.sortKey === sortKey && !this.state.isSortReverse;
-    this.setState({ sortKey, isSortReverse });
   }
 
   needsToSearchTopstories(searchTerm) {
@@ -111,7 +85,7 @@ class App extends Component {
   }
 
   render() {
-    const { searchTerm, results, searchKey, isLoading, sortKey, isSortReverse }
+    const { searchTerm, results, searchKey, isLoading }
       = this.state;
     const page = (results && results[searchKey] && results[searchKey].page) || 0;
     const list = (results && results[searchKey] && results[searchKey].hits) || [];
@@ -128,10 +102,6 @@ class App extends Component {
             <Table
               list={list}
               onDismiss={this.onDismiss}
-              sortKey={sortKey}
-              onSort={this.onSort}
-              sortBy={this.sortBy}
-              isSortReverse={isSortReverse}
             />
             <div className="interactions">
               {isLoading ?
