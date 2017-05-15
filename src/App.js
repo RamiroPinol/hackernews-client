@@ -25,6 +25,7 @@ class App extends Component {
       searchKey: '',
       isLoading: false,
       sortKey: 'NONE',
+      isSortReverse: false,
     };
 
     this.onDismiss = this.onDismiss.bind(this);
@@ -66,7 +67,9 @@ class App extends Component {
 
   // Method to change sortKey
   onSort(sortKey) {
-    this.setState({ sortKey });
+    const isSortReverse =
+      this.state.sortKey === sortKey && !this.state.isSortReverse;
+    this.setState({ sortKey, isSortReverse });
   }
 
   needsToSearchTopstories(searchTerm) {
@@ -108,7 +111,8 @@ class App extends Component {
   }
 
   render() {
-    const { searchTerm, results, searchKey, isLoading, sortKey } = this.state;
+    const { searchTerm, results, searchKey, isLoading, sortKey, isSortReverse }
+      = this.state;
     const page = (results && results[searchKey] && results[searchKey].page) || 0;
     const list = (results && results[searchKey] && results[searchKey].hits) || [];
 
@@ -127,12 +131,14 @@ class App extends Component {
               sortKey={sortKey}
               onSort={this.onSort}
               sortBy={this.sortBy}
+              isSortReverse={isSortReverse}
             />
             <div className="interactions">
               {isLoading ?
                 <Loading /> :
-                <Button onClick={() => this.fetchSearchTopstories(searchKey, page + 1)}>
-                  More
+                <Button
+                  onClick={() => this.fetchSearchTopstories(searchKey, page + 1)}
+                >More
                 </Button>
               }
             </div>
