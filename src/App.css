@@ -1,9 +1,60 @@
+body {
+  margin: 0;
+  color: #F3FFE2;
+  background-color: #1D2127;
+  background-image: url("noisy-texture.png");
+  font: 400 14px CoreSans, Arial, sans-serif;
+}
+
+a {
+  color: #F3FFE2;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+ul, li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+input {
+  padding: 10px;
+  border-radius: 5px;
+  outline: none;
+  margin-right: 10px;
+  border: 1px solid #dddddd;
+}
+
+button {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #dddddd;
+  background: transparent;
+  color: #808080;
+  cursor: pointer;
+}
+
+button:hover {
+  color: #222;
+}
+
+*:focus {
+  outline: none;
+}
+
 .page {
   margin: 20px;
 }
 
-.interactions {
-  text-align: center;
+header {
+  background: #ff6600;
+}
+
+header h2 {
+  margin: 0;
 }
 
 .table {
@@ -30,8 +81,8 @@
   white-space: nowrap;
   margin: 10px 0;
   padding: 10px;
-  background: #ffffff;
-  border: 1px solid #e3e3e3;
+  box-shadow: inset 0 2px 3px -2px rgba(255, 255, 255, 0.25), 0 -3px 2px -3px rgba(0, 0, 0, 0.75);
+  border-top: 1px solid #0b0c0f;
 }
 
 .table-header>span {
@@ -43,7 +94,6 @@
 .table-row>span {
   overflow: hidden;
   text-overflow: ellipsis;
-  padding: 0 5px;
 }
 
 .button-inline {
@@ -72,4 +122,21 @@
 
 .active.reverse::after {
   content: " ˄";
+}
+
+.item-title {
+  width: 65%;
+  padding: 0 5px;
+}
+
+.item-dismiss, {
+  width: 10%;
+}
+
+.item-author  {
+  width: 15%;
+}
+
+.item-comments, .item-points {
+  width: 5%;
 }

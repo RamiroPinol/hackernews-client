@@ -53,13 +53,13 @@ class Table extends Component {
 
         {reverseSortedList.map(item =>
           <div key={item.objectID} className="table-row">
-            <span>
+            <span className="item-title">
               <a href={item.url}>{item.title}</a>
             </span>
-            <span>{item.author}</span>
-            <span>{item.num_comments}</span>
-            <span>{item.points}</span>
-            <span>
+            <span className="item-author">{item.author}</span>
+            <span className="item-comments">{item.num_comments}</span>
+            <span className="item-points">{item.points}</span>
+            <span className="item-dismiss">
               <Button
                 className="button-inline"
                 onClick={() => this.props.onDismiss(item.objectID)}

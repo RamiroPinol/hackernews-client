@@ -3,6 +3,7 @@ import Search from './Search';
 import Table from './Table';
 import Button from './Button';
 import Loading from './Loading';
+import Header from './Header';
 import './App.css';
 
 const DEFAULT_QUERY = 'redux';
@@ -33,16 +34,18 @@ class App extends Component {
     this.fetchSearchTopstories = this.fetchSearchTopstories.bind(this);
     this.needsToSearchTopstories = this.needsToSearchTopstories.bind(this);
   }
-
   setSearchTopstories(result) {
     const { hits, page } = result;
-    const { searchKey, results } = this.state;
 
-    const oldHits = results && results[searchKey] ? results[searchKey].hits : [];
-    const updatedHits = [...oldHits, ...hits];
-    this.setState({
-      results: { ...results, [searchKey]: { hits: updatedHits, page } },
-      isLoading: false,
+    this.setState((prevState) => {
+      const { searchKey, results } = prevState;
+
+      const oldHits = results && results[searchKey] ? results[searchKey].hits : [];
+      const updatedHits = [...oldHits, ...hits];
+      return {
+        results: { ...results, [searchKey]: { hits: updatedHits, page } },
+        isLoading: false,
+      };
     });
   }
 
@@ -91,27 +94,31 @@ class App extends Component {
     const list = (results && results[searchKey] && results[searchKey].hits) || [];
 
     return (
-      <div className="page">
-        <div className="interactions">
-          <div className="App">
-            <Search
-              value={searchTerm}
-              onChange={this.onSearchChange}
-              onSubmit={this.onSearchSubmit}
-            >Search</Search>
-            <Table
-              list={list}
-              onDismiss={this.onDismiss}
-            />
-            <div className="interactions">
-              {isLoading ?
-                <Loading /> :
-                <Button
-                  onClick={() => this.fetchSearchTopstories(searchKey, page + 1)}
-                >More
-                </Button>
-              }
-            </div>
+      <div className="App">
+
+        <Header />
+
+        <div className="page">
+
+          <Search
+            value={searchTerm}
+            onChange={this.onSearchChange}
+            onSubmit={this.onSearchSubmit}
+          >Search</Search>
+
+          <Table
+            list={list}
+            onDismiss={this.onDismiss}
+          />
+
+          <div className="interactions">
+            {isLoading ?
+              <Loading /> :
+              <Button
+                onClick={() => this.fetchSearchTopstories(searchKey, page + 1)}
+              >More
+              </Button>
+            }
           </div>
         </div>
       </div>
