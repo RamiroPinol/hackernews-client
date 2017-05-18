@@ -36,6 +36,7 @@ header p {
 
 /* Search input*/
 input {
+  background-color: #F3FFE2;
   padding: 10px;
   border-radius: 5px;
   outline: none;
@@ -60,10 +61,20 @@ button:hover {
 
 /* Dismiss button */
 .dismiss-button {
+  color: #858c7c;
   float: right;
+  font-size: 24px;
+  line-height: 20px;
   position: relative;
-  bottom: 45px;
+  bottom: 48px;
+  border: 0;
 }
+
+.dismiss-button:hover {
+  color: #ff6600;
+  box-shadow: none;
+}
+
 
 /*Sort bar button*/
 .sort-button {
@@ -178,4 +189,48 @@ a:hover {
 
 .item-comments, .item-points {
   width: 5%;
+}
+
+@media screen and (max-width : 400px) {
+  .page {
+    margin: 20px 10px;
+  }
+
+  .table-header {
+    font-size: 0;
+    padding: 0;
+  }
+
+  .sort-button {
+    font-size: 10px;
+    width: 70px;
+  }
+
+  .item-title {
+    font-size: 14px;
+    width: auto;
+  }
+
+  .item-info > span {
+    font-size: 10px;
+  }
+
+  .table-row {
+    padding: 10px 0;
+  }
+}
+
+@media screen and (min-width : 1200px) {
+  .table-row {
+    text-align: left;
+  }
+
+  .table-row > * {
+    display: initial;
+    width: auto;
+  }
+
+  .dismiss-button {
+    bottom: 35px;
+  }
 }

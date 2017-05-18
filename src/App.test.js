@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
-import { shallow } from 'enzyme'
+import { shallow } from 'enzyme';
 import App from './App';
 import Search from './Search';
 import Button from './Button';

@@ -65,7 +65,7 @@ class Table extends Component {
             <Button
               className="dismiss-button"
               onClick={() => this.props.onDismiss(item.objectID)}
-            >Dismiss
+            ><i className="fa fa-times" aria-hidden="true" />
             </Button>
           </div>)}
       </div>
