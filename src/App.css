@@ -196,11 +196,6 @@ a:hover {
     margin: 20px 10px;
   }
 
-  .table-header {
-    font-size: 0;
-    padding: 0;
-  }
-
   .sort-button {
     font-size: 10px;
     width: 70px;
@@ -220,6 +215,13 @@ a:hover {
   }
 }
 
+@media screen and (max-width : 500px) {
+  .table-header {
+    font-size: 0;
+    padding: 0;
+  }
+}
+
 @media screen and (min-width : 1200px) {
   .table-row {
     text-align: left;
@@ -231,6 +233,13 @@ a:hover {
   }
 
   .dismiss-button {
+    bottom: 10px;
+  }
+
+  @-moz-document url-prefix() {
+  .dismiss-button {
     bottom: 35px;
   }
+}
+
 }
