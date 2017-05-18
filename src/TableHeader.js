@@ -5,42 +5,31 @@ import Button from './Button';
 
 const TableHeader = ({ onSort, sortKey, isSortReverse }) => {
   // Returns string template to add classes to active button
-  const classStr = string => `button-inline ${sortKey === string ? 'active' : ''}
+  const classStr = string => `sort-button ${sortKey === string ? 'active' : ''}
   ${isSortReverse ? 'reverse' : ''}`;
 
   return (
-    <div className="table-header">
-      <span>
-        <Button
-          onClick={() => onSort('title')}
-          className={classStr('title')}
-        >Title
-        </Button>
-      </span>
-      <span>
-        <Button
-          onClick={() => onSort('author')}
-          className={classStr('author')}
-        >Author
-        </Button>
-      </span>
-      <span>
-        <Button
-          onClick={() => onSort('num_comments')}
-          className={classStr('num_comments')}
-        >Comments
-        </Button>
-      </span>
-      <span>
-        <Button
-          onClick={() => onSort('points')}
-          className={classStr('points')}
-        >Points
-        </Button>
-      </span>
-      <span>
-        Archive
-      </span>
+    <div className="table-header">SORT BY:
+      <Button
+        onClick={() => onSort('title')}
+        className={classStr('title')}
+      >Title
+      </Button>
+      <Button
+        onClick={() => onSort('author')}
+        className={classStr('author')}
+      >Author
+      </Button>
+      <Button
+        onClick={() => onSort('num_comments')}
+        className={classStr('num_comments')}
+      >Comments
+      </Button>
+      <Button
+        onClick={() => onSort('points')}
+        className={classStr('points')}
+      >Points
+      </Button>
     </div>
   );
 };
