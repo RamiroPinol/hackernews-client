@@ -1,6 +1,7 @@
 {
   "name": "hackernews-client",
   "version": "0.1.0",
+  "homepage": "https://ramiropinol.github.io/hackernews-client/",
   "dependencies": {
     "prop-types": "^15.5.9",
     "react": "^15.5.4",
